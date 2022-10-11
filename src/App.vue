@@ -1,26 +1,66 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <div class="box" v-if="!(path ==='/login' || path ==='/Register' || path ==='/Login')">
+      <div class="box1">
+        <HeadNav></HeadNav>
+      </div>
+      <div class="box2">
+        <LeftNav></LeftNav>
+        <router-view/>
+      </div>
+    </div>
+    <div v-if="(path ==='/login' || path ==='/Register' || path ==='/Login')">
+      <router-view/>
+    </div>
+  </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      path: ''
+    }
+  },
+  // 判断路由
+  mounted() {
+    this.path = this.$route.path;
+    console.log(this.$route.path)
+  },
+  watch:{
+    $route(to,from){
+      this.path = to.path
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.box{
+  width: auto;
+  height: auto;
+}
+.box1{
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+.box2{
+  width: 100%;
+  height: auto;
+  /*background-color: #cc40ff;*/
+  display: flex;
+}
+body{
+  margin: 8px 0;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: -1;
+  background-size: cover;
+  left: 0;
+  background-color: #545c64;
 }
 </style>
