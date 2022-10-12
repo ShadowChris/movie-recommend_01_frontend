@@ -1,10 +1,10 @@
 //配置连接oss
 let OSS = require('ali-oss')
 export let client = new OSS({
-    region: 'oss-cn-beijing',
-    accessKeyId: 'LTAI5t7F4EknEEwsvX7vTt3d',
-    accessKeySecret: 'GDiOCB362FNZZHa1EqUPVaF42I5dEg',
-    bucket: 'lzh-pic'
+    region: '',
+    accessKeyId: '',
+    accessKeySecret: '',
+    bucket: ''
 })
 
 //单独标记每个文件
