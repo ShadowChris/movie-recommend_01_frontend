@@ -1,13 +1,13 @@
 <template>
-  <div id="OldManAdd">
+  <div id="MovieAdd">
 
     <el-main style="padding: 0">
       <el-breadcrumb separator-class="el-icon-arrow-right" style="background: #669999">
-        <el-breadcrumb-item style="padding: 10px 0 2px 10px; font-size: 1.5em;">老人信息</el-breadcrumb-item>
+        <el-breadcrumb-item style="padding: 10px 0 2px 10px; font-size: 1.5em;">电影信息</el-breadcrumb-item>
         <el-breadcrumb-item  style="padding: 15px 0 2px 0; font-size: 1.1em">录入信息</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="detail-title">
-        老人信息录入
+        电影信息录入
       </div>
 
 <!--      <div class="profile-container">-->
@@ -27,59 +27,47 @@
 <!--            <el-input v-model="username"></el-input>-->
 <!--          </el-form-item>-->
 <!--          <br>-->
+<!--          <el-aside>-->
+<!--            <el-upload-->
+<!--                class="avatar-uploader"-->
+<!--                action="https://jsonplaceholder.typicode.com/posts/"-->
+<!--                :show-file-list="false"-->
+<!--                :on-success="handleAvatarSuccess"-->
+<!--                :before-upload="beforeAvatarUpload">-->
+<!--              <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+<!--              <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+<!--            </el-upload>-->
 
+<!--          </el-aside>-->
           <el-row :gutter="200">
             <el-col :span="12">
 <!--              <el-form-item label="ID">-->
 <!--                <el-input v-model="ID" disabled></el-input>-->
 <!--              </el-form-item>-->
-              <el-form-item label="姓名" >
-                <el-input v-model="username"></el-input>
+              <el-form-item label="名称" >
+                <el-input v-model="name"></el-input>
               </el-form-item>
 
-              <el-form-item label="性别">
-                <el-radio v-model="gender" label="男">男</el-radio>
-                <el-radio v-model="gender" label="女">女</el-radio>
+              <el-form-item label="发表时间">
+                <el-input v-model="date"></el-input>
               </el-form-item>
-              <el-form-item label="电话">
-                <el-input v-model="phone"></el-input>
-              </el-form-item>
-              <el-form-item label="身份证号">
-                <el-input v-model="id_card"></el-input>
+              <el-form-item label="导演">
+                <el-input v-model="directors"></el-input>
               </el-form-item>
 
             </el-col>
 
             <el-col :span="12">
 
-              <el-form-item label="房间号">
-                <el-input v-model="room_number"></el-input>
+              <el-form-item label="编剧">
+                <el-input v-model="writers"></el-input>
               </el-form-item>
 
-              <el-form-item label="出生日期">
-                <el-date-picker
-                    value-format="yyyy-MM-dd HH:mm:ss"
-                    v-model="birthday"
-                    type="date"
-                    placeholder="选择日期">
-                </el-date-picker>
+              <el-form-item label="主演">
+                <el-input v-model="stars"></el-input>
               </el-form-item>
-              <el-form-item label="入园日期">
-                <el-date-picker
-                    value-format="yyyy-MM-dd HH:mm:ss"
-                    v-model="checkin_date"
-                    type="date"
-                    placeholder="选择日期">
-                </el-date-picker>
-              </el-form-item>
-              <el-form-item label="出园日期">
-                <el-date-picker
-                    value-format="yyyy-MM-dd HH:mm:ss"
-                    v-model="checkout_date"
-                    type="date"
-                    placeholder="选择日期">
-                </el-date-picker>
-              </el-form-item>
+
+
             </el-col>
           </el-row>
 
@@ -87,7 +75,7 @@
           <br>
           <el-col align="center">
             <el-form-item>
-              <el-button type="primary" @click="updateBlog">录入</el-button>
+              <el-button type="primary" @click="open">录入</el-button>
             </el-form-item>
           </el-col>
 
@@ -106,34 +94,50 @@ export default {
     return {
       type: 1,
       // ID: "",
-      username: "",
-      gender: "",
+      name: "",
+      date: "",
       phone: "",
-      id_card: "",
-      room_number: "",
-      birthday: "",
-      checkin_date: "",
-      checkout_date: ""
+      directors: "",
+      writers: "",
+      stars: "",
+      imageUrl: ''
     };
   },
 
   methods: {
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
+    open() {
+      this.$message('录入成功');
+    },
+
     updateBlog() {
       this.$http
           .post(this.global.baseURL + this.global.oldManURL.add, {
-            username: this.username,
-            gender: this.gender,
+            name: this.name,
+            date: this.date,
             phone: this.phone,
-            id_card: this.id_card,
-            room_number: this.room_number,
-            birthday: this.birthday,
-            checkin_date: this.checkin_date,
-            checkout_date: this.checkout_date
+            directors: this.directors,
+            writers: this.writers,
+            stars: this.stars
           })
           .then(result => {
             // eslint-disable-next-line no-redeclare
             // var result = result.body;
-            console.log("Add old man: ")
+            console.log("Add movie: ")
             console.log(result)
             if (result.status === 200) {
               this.$message.success("添加成功！");
@@ -231,6 +235,29 @@ export default {
   font-size: 40px;
   font-weight: bold;
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 
 </style>

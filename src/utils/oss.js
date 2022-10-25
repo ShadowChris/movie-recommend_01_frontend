@@ -1,11 +1,11 @@
 //配置连接oss
 let OSS = require('ali-oss')
-export let client = new OSS({
-    region: '',
-    accessKeyId: '',
-    accessKeySecret: '',
-    bucket: ''
-})
+// export let client = new OSS({
+//     // region: '1',
+//     // accessKeyId: '1',
+//     // accessKeySecret: '1',
+//     // bucket: '1'
+// })
 
 //单独标记每个文件
 export function getCurrentDateTime(){

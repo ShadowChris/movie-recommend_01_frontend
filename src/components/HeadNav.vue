@@ -16,7 +16,9 @@
 <!--          <el-avatar :size="small" :src="this.user['logoimage']"></el-avatar>-->
 <!--          {{ user['userName'] }}-->
         </template>
+        <el-menu-item @click="$router.push('/Register')">登录</el-menu-item>
         <el-menu-item @click="$router.push('/AdminDetails')">修改</el-menu-item>
+        <el-menu-item @click="$router.push('/MovieView')">向我推荐</el-menu-item>
         <el-menu-item @click="msg_exit()">退出</el-menu-item>
       </el-submenu>
     </el-menu>

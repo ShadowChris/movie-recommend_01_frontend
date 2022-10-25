@@ -1,304 +1,157 @@
 <template>
-  <div class="box">
-    <div class="right">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item style="padding: 10px 0 2px 10px; font-size: 1.5em;">首页</el-breadcrumb-item>
-        <el-breadcrumb-item  style="padding: 15px 0 2px 0; font-size: 1.1em">管理员信息</el-breadcrumb-item>
-      </el-breadcrumb>
-      <div class="videos">
-        <el-main class="show">
-          <div class="basic">
-            <div class="card11">
-              <el-col :span="4" :offset="1">
-                <div class="demo-basic--circle" style="margin-top: 5%">
-                  <div class="block" style="width: 100%;height: 100%;"><el-avatar :size="60" :src="user['logoimage']"></el-avatar></div>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="sub-title" style="vertical-align: middle">
-                  <h2>{{ user['userName'] }}</h2>
-                </div>
-              </el-col>
-              <el-col :span="2" :offset="6">
-                <el-button style="margin-top: 30%; margin-left: 200%;color: #fffa12" icon="el-icon-edit" type="text" @click="$router.push('/AdminDetails')" >修改</el-button>
+<div id="Home">
 
-              </el-col>
-            </div>
-            <div class="card12">
-              <el-row :gutter="20" style="padding-top: 10px">
-                <el-col :span="14" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
-                  <i class="el-icon-user"></i>
-                  <h3>&nbsp;姓名:&nbsp;</h3>
-                  <span>{{ user['real_name'] }}</span>
-                </div></el-col>
-                <el-col :span="10"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
-                  <i class="el-icon-female"></i>
-                  <i class="el-icon-male"></i>
-                  <h3>&nbsp;性别:&nbsp;</h3>
-                  <span>{{ user['sex'] }}</span>
-                </div></el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="24" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
-                  <i class="el-icon-position"></i>
-                  <h3>&nbsp;邮箱:&nbsp;</h3>
-                  <span>{{ user['email'] }}</span>
-                </div></el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="24" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
-                  <i class="el-icon-phone-outline"></i>
-                  <h3>&nbsp;手机:&nbsp;</h3>
-                  <span>{{ user['mobile'] }}</span>
-                </div></el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :span="24" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
-                  <i class="el-icon-phone-outline"></i>
-                  <h3>&nbsp;固话:&nbsp;</h3>
-                  <span>{{ user['phone'] }}</span>
-                </div></el-col>
-              </el-row>
-            </div>
-          </div>
-          <div class="psw">
-<!--              <span class="demonstration">Click 指示器触发</span>-->
-              <el-carousel trigger="click" height="350px">
-                <el-carousel-item v-for="item in urls" :key="item">
-<!--                  <img :src="item.u">-->
-                  <img style="width: 100%;height: auto;margin-top: 0" :src="item">
-<!--                  <h3 class="small">{{ item }}</h3>-->
-                </el-carousel-item>
-              </el-carousel>
-          </div>
+  <el-container style="padding-top: 100px; width: 1500px; background-color: #e8e8e8">
+    <el-header>
+      <el-row>
+        <el-col :span="25"><el-input v-model="input" placeholder="请输入内容"></el-input></el-col>
+        <el-col :span="1"><el-button icon="el-icon-search" circle @click="this.search"></el-button></el-col>
+      </el-row>
+    </el-header>
 
-        </el-main>
-        <el-main class="infom">
-          <div class="card1" @click="imginto('fall')">
-<!--            <img src="../assets/diedao.png">-->
-            <div style="padding-top: 16.5%">
-              <span style="color: white">跌倒</span>
+    <el-main>
+      <el-row>
+        <el-col :span="8" v-for="(item) in this.movieList" :key="item.id">
+          <el-card :body-style="{ padding: '0px' }">
+            <img :src="item.url" class="image">
+            <div style="padding: 8px; text-align: center">
+              <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>
+              <div class="bottom clearfix">
+                <router-link :to="'/MovieDetails/' + item.id">详细信息</router-link>
+              </div>
+              <div class="block">
+                <el-rate
+                    v-model="item.rating"
+                    disabled
+                    show-score
+                    text-color="#ff9900"
+                    score-template="{value}">
+                </el-rate>
+              </div>
             </div>
-          </div>
-          <div class="card2" @click="imginto('activity')">
-<!--            <img src="../assets/jiaotan.png">-->
-            <div style="padding-top: 10%">
-              <span style="color: white">交互</span>
-            </div>
-          </div>
-          <div class="card3" @click="imginto('fence')">
-<!--            <img src="../assets/moshengrenruqin.png">-->
-            <div style="padding-top: 10%">
-              <span style="color: white">入侵</span>
-            </div>
-          </div>
-          <div class="card4" @click="imginto('strangers')">
-<!--            <img src="../assets/shequjingqing_moshengrenyichangzengjia.png">-->
-            <div style="padding-top: 10%">
-              <span style="color: white">陌生人</span>
-            </div>
-          </div>
-          <div class="card5" @click="imginto('smile')">
-<!--            <img src="../assets/zu1783.png">-->
-            <div style="padding-top: 10%">
-              <span style="color: white">表情</span>
-            </div>
-          </div>
-        </el-main>
-      </div>
-      <div class="tip">
-        <el-footer>Copyright &nbsp; 2021 &nbsp; BJTU_养老专业团队</el-footer>
-      </div>
-    </div>
-  </div>
+          </el-card>
+
+        </el-col>
+      </el-row>
+
+    </el-main>
+    <el-footer>
+      <el-row>
+        <div class="block">
+          <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              @next-click="getPage"
+              :current-page.sync="currentPage"
+              :page-size=this.pageSize
+              layout="prev, pager, next, jumper"
+              :total="1000">
+          </el-pagination>
+        </div>
+      </el-row>
+    </el-footer>
+
+
+  </el-container>
+
+</div>
 </template>
 
-
-
 <script>
+import axios from "axios";
+import global_variable from "@/utils/global_variable";
+
 export default {
-  name: "HomeInform",
+  name: "Test",
 
-  data () {
-    return {
-      url: 'http://192.168.159.128:5000/',
-      circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-      squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
-      sizeList: ["large", "medium", "small"],
-      user: [],
-
-      urls: [
-        require('../assets/carousel1.png'),
-        require('../assets/carousel2.png'),
-        require('../assets/carousel3.png'),
-        require('../assets/carousel4.png'),
-      ],
-    }
+  data() {
+      return {
+        input: "",
+        colors: ['#99A9BF', '#F7BA2A', '#FF9900'], // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' },
+        movieList: [],
+        currentPage: 1,
+        pageSize: 5
+      }
   },
-  created() {
 
-    if(sessionStorage.getItem("user") != null)
-    //获取登录的用户信息
-    this.user = JSON.parse(sessionStorage.getItem("user"))
+  methods: {
+    showData() {
+      console.log(this.input)
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
 
-  },
-  methods:{
-    //进入截图界面
-    imginto(name) {
-      console.log('dsad')
-      this.$router.push({
-        path: `/Shoot/${name}`
-      });
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+
+      this.search()
+    },
+    getPage() {
+      axios.post(global_variable.springURL + '/home/queryMovieList', {
+        pageNum: this.currentPage,
+        pageSize: this.pageSize
+      }).then(res => {
+        this.movieList = res.data.data.list
+        // this.currentPage = res.data.data.pageNum
+        // this.pageSize = res.data.data.pageSize
+        console.log(res)
+      })
     },
 
-    //进入修改界面
-    goDetail(){
-      this.$router.push({
-        path: `/AdminDetails`
-      });
+    search(){
+      axios.post(global_variable.springURL + '/home/queryMovieList', {
+        name:this.input,
+        pageNum: this.currentPage,
+        pageSize: this.pageSize
+      }).then(res => {
+        this.movieList = res.data.data.list
+        // this.currentPage = res.data.data.pageNum
+        // this.pageSize = res.data.data.pageSize
+        console.log(res)
+      })
     },
   },
+
+  mounted() {
+   this.getPage()
+  }
 }
+
 </script>
 
-<style scoped>
-.box{
-  width: 100%;
-  height: 100%;
-  /*background-color: #766d17;*/
-  display: flex;
-}
-.right{
-  width: 100%;
-  height: 660px;
-  background-color: #41296f;
-  /*margin-right:0;*/
-  margin: 53px 0 0 0;
-  /*z-index: 1;*/
-}
-.videos{
-  width: 100%;
-  height: 100%;
-}
-.show{
-  width: 100%;
-  height: 60%;
-  background-color: #ffffff;
-  display: flex;
-}
-.infom{
-  display: flex;
-  height: 40%;
-  width: 100%;
-  background-color: #ffffff;
-  text-align: center;
-  padding: 20px;
-  /*background: url('../assets/CCTV1.png');*/
-  /*background-size: cover;*/
-}
-.basic{
-  width: 50%;
-  height: 100%;
-  background-color:#BF9130;
-  margin-right: 10px;
-  border-radius: 10px;
-}
-.psw{
-  width: 50%;
-  height: 100%;
-  margin-left: 10px;
-  /*background-color: burlywood;*/
-}
-.card11{
-  width: 100%;
-  height: 20%;
-}
-.card12{
-  width: 100%;
-  height: 80%;
-  background-color: #6D89D5;
-  border-radius: 0 0 10px 10px;
-}
-.card1{
-  width: 20%;
-  height: 99%;
-  margin: 0 5px;
-  background-color: #226e90;
-  border: 1px solid #ffffff;
-  border-radius: 30px;
-}
-.card1:hover{
-  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
-}
-.card2{
-  width: 20%;
-  height: 99%;
-  margin: 0 5px;
-  background-color: #226e90;
-  border: 1px solid #ffffff;
-  border-radius: 30px;
-}
-.card2:hover{
-  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
-}
-.card3{
-  width: 20%;
-  height: 99%;
-  margin: 0 5px;
-  background-color: #226e90;
-  border: 1px solid #ffffff;
-  border-radius: 30px;
-}
-.card3:hover{
-  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
-}
-.card4{
-  width: 20%;
-  height: 99%;
-  margin: 0 5px;
-  background-color: #226e90;
-  border: 1px solid #ffffff;
-  border-radius: 30px;
-}
-.card4:hover{
-  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
-}
-.card5{
-  width: 20%;
-  height: 99%;
-  margin: 0 5px;
-  background-color: #226e90;
-  border: 1px solid #ffffff;
-  border-radius: 30px;
-}
-.card5:hover{
-  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
-}
-.tip{
-  height: auto;
-  width: 100%;
-  /*background-color: #ffb352;*/
-  text-align: center;
-  padding-top: 20px;
-}
-.el-main img{
-  width: 50%;
-  height: auto;
-  margin-top: 10%;
-}
-
-</style>
-
 <style>
-span.el-breadcrumb__inner {
-  color: #ffffff;
-}
-/*.el-carousel__item, .el-carousel__mask {*/
-/*  height: 100%;*/
-/*  top: 0!important;*/
-/*  bottom: 30px;*/
-/*  left: 0;*/
-/*  position: absolute;*/
-/*}*/
-</style>
 
+span{
+  text-align: center;
+}
+.time {
+  font-size: 13px;
+  color: #999;
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.button {
+  padding: 0;
+  float: right;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both
+}
+</style>

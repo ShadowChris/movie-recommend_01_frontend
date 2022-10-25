@@ -23,24 +23,26 @@
         <template #title>首页</template>
       </el-menu-item>
 
+
+
       <el-submenu index="2">
         <template #title>
           <i class="el-icon-user"></i>
-          <span>电影信息</span>
+          <span>算法展示</span>
         </template>
-        <el-menu-item index="/OldManInfo">信息列表</el-menu-item>
-        <el-menu-item index="/OldManAdd">录入信息</el-menu-item>
+        <el-menu-item index="/MovieView">推荐算法</el-menu-item>
+        <el-menu-item index="/Home">主页</el-menu-item>
+        <el-menu-item index="/Test2">Test2</el-menu-item>
       </el-submenu>
 
       <el-submenu index="3">
         <template #title>
           <i class="el-icon-user"></i>
-          <span>推荐算法性能展示</span>
+          <span>电影信息</span>
         </template>
-        <el-menu-item index="/OldChart">推荐算法</el-menu-item>
-        <el-menu-item index="/Test">Test</el-menu-item>
+        <el-menu-item index="/MovieInfo">信息列表</el-menu-item>
+        <el-menu-item index="/MovieAdd">录入信息</el-menu-item>
       </el-submenu>
-
 
 
     </el-menu>

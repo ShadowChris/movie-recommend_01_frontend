@@ -11,35 +11,38 @@
       </div>
       <div class="box22">
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" id="block" :label-position="labelPosition" >
-          <el-form-item label="用户名" prop="Username" id="e">
-            <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.username"></el-input>
-          </el-form-item>
-          <el-form-item label="真实姓名" prop="Realname" id="es">
-            <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.realname"></el-input>
-          </el-form-item>
-          <el-form-item label="邮箱" prop="mail" id="ei">
-            <el-input prefix-icon="el-icon-s-promotion"  v-model="ruleForm.mail"></el-input>
-          </el-form-item>
+<!--          <el-form-item label="用户名" prop="username" id="e">-->
+<!--            <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.username"></el-input>-->
+<!--          </el-form-item>-->
+<!--          <el-form-item label="真实姓名" prop="Realname" id="es">-->
+<!--            <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.realname"></el-input>-->
+<!--          </el-form-item>-->
+<!--          <el-form-item label="邮箱" prop="mail" id="ei">-->
+<!--            <el-input prefix-icon="el-icon-s-promotion"  v-model="ruleForm.mail"></el-input>-->
+<!--          </el-form-item>-->
           <el-form-item label="手机号" prop="phone" id="eisss">
-            <el-input prefix-icon="el-icon-phone"  v-model.number="ruleForm.phone"></el-input>
+            <el-input prefix-icon="el-icon-phone"  v-model="ruleForm.mobile"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="pass" id="eis">
-            <el-input prefix-icon="el-icon-key" type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+          <el-form-item label="密码" prop="passwd" id="eis">
+            <el-input prefix-icon="el-icon-key" type="password" v-model="ruleForm.passwd" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="确认密码" prop="checkPass" id="eiss">
             <el-input prefix-icon="el-icon-key" type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
           </el-form-item>
-          <el-row :gutter="20">
-            <div id="eisssss">
-              <el-col :span="4" :offset="2"><span>性别</span></el-col>
-              <el-col :span="18" ><el-radio-group style="padding-right: 35%" v-model="ruleForm.sex">
-<!--                <el-col :span="4" :offset="4"><el-radio label="man">男</el-radio></el-col>-->
-<!--                <el-col :span="4" :offset="4"><el-radio label="woman">女</el-radio></el-col>-->
-                <el-radio label="男">男</el-radio>
-                <el-radio label="女">女</el-radio>
-              </el-radio-group></el-col>
-            </div>
-          </el-row>
+          <el-form-item label="验证码" prop="code" id="e">
+            <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.code"></el-input>
+          </el-form-item>
+<!--          <el-row :gutter="20">-->
+<!--            <div id="eisssss">-->
+<!--              <el-col :span="4" :offset="2"><span>性别</span></el-col>-->
+<!--              <el-col :span="18" ><el-radio-group style="padding-right: 35%" v-model="ruleForm.sex">-->
+<!--&lt;!&ndash;                <el-col :span="4" :offset="4"><el-radio label="man">男</el-radio></el-col>&ndash;&gt;-->
+<!--&lt;!&ndash;                <el-col :span="4" :offset="4"><el-radio label="woman">女</el-radio></el-col>&ndash;&gt;-->
+<!--                <el-radio label="男">男</el-radio>-->
+<!--                <el-radio label="女">女</el-radio>-->
+<!--              </el-radio-group></el-col>-->
+<!--            </div>-->
+<!--          </el-row>-->
 
           <el-row :gutter="20">
             <div class="butbox">
@@ -55,23 +58,25 @@
 
 <script>
 
+import axios from "axios";
+
 const TIME_COUNT = 60 // 设置一个全局的倒计时的时间
 export default {
   name: 'Register',
   data() {
-    var checkMail = (rule, value, callback) => {
-      const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-      if (!value) {
-        return callback(new Error('邮箱不能为空'));
-      }
-      setTimeout(() => {
-        if (mailReg.test(value)) {
-          callback()
-        } else {
-          callback(new Error('请输入正确的邮箱格式'))
-        }
-      }, 100)
-    };
+    // var checkMail = (rule, value, callback) => {
+    //   const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+    //   if (!value) {
+    //     return callback(new Error('邮箱不能为空'));
+    //   }
+    //   setTimeout(() => {
+    //     if (mailReg.test(value)) {
+    //       callback()
+    //     } else {
+    //       callback(new Error('请输入正确的邮箱格式'))
+    //     }
+    //   }, 100)
+    // };
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请输入密码'));
@@ -79,17 +84,17 @@ export default {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass');
         }
-        if(!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){10,16}$/.test(value)) {
-          callback(new Error('请输入10-16位英文字母、数字或者符号(除空格)，且字母、数字和标点符号至少包含两种'))
-
-        }
+        // if(!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){10,16}$/.test(value)) {
+        //   callback(new Error('请输入10-16位英文字母、数字或者符号(除空格)，且字母、数字和标点符号至少包含两种'))
+        //
+        // }
         callback();
       }
     };
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
-      } else if (value !== this.ruleForm.pass) {
+      } else if (value !== this.ruleForm.passwd) {
         callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
@@ -112,13 +117,10 @@ export default {
     return {
       labelPosition:'right',
       ruleForm: {
-        username: '',
-        realname:'',
-        sex:'',
-        pass: '',
-        checkPass: '',
-        mail: '',
-        phone: '',
+        mobile: "",
+        passwd: "",
+        checkPass: "",
+        code: "123456"
       },
       rules: {
         pass: [
@@ -127,10 +129,10 @@ export default {
         checkPass: [
           { validator: validatePass2, trigger: 'blur' }
         ],
-        mail: [
-          { validator: checkMail, trigger: 'blur' }
-        ],
-        phone: [
+        // mail: [
+        //   { validator: checkMail, trigger: 'blur' }
+        // ],
+        mobile: [
           { validator:checkPhone, trigger: 'blur'}
         ],
       }
@@ -173,19 +175,15 @@ export default {
         if (valid) {
               this.$http({
                 method: 'post',
-                url: this.global.baseURL + '/back/register',
+                url: "http://192.168.1.100:8282" + '/signup/mobile',
                 data: {
-                  'UserName':this.ruleForm.username,
-                  'Password':this.ruleForm.pass,
-                  'REAL_NAME':this.ruleForm.realname,
-                  'SEX':this.ruleForm.sex,
-                  'EMAIL':this.ruleForm.mail,
-                  'PHONE':'N/A',
-                  'MOBILE':this.ruleForm.phone
+                  mobile:this.ruleForm.mobile,
+                  passwd:this.ruleForm.passwd,
+                  code: this.ruleForm.code
                 }
               }).then(res=>{
                 console.log(res)
-                if(res.data.status == '0'){
+                if(res.data.code == 200){
                   this.$router.replace("/login");
                   this.$message.success('注册成功');
                 }
@@ -196,6 +194,7 @@ export default {
         }
       });
     },
+
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }

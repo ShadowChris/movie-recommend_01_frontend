@@ -3,15 +3,21 @@ import VueRouter from 'vue-router'
 import Login from "@/views/Login";
 import Register from "@/views/Register";
 
-import HomeInform from "@/views/Home";
+import HomeInform from "@/views/HomeSample";
 
 import AdminDetails from "@/views/sample/AdminDetails";
 
-import OldManInfo from "@/views/sample/OldManInfo";
-import OldManAdd from "@/views/sample/OldManAdd";
-import OldManDetails from "@/views/sample/OldManDetails";
+import MovieInfo from "@/views/sample/MovieInfo";
+import MovieAdd from "@/views/sample/MovieAdd";
+import MovieDetailsBackend from "@/views/sample/MovieDetailsBackend";
 
-import Test from "@/views/Test"
+import Home from "@/views/Home"
+import Test2 from "@/views/Test2";
+import MovieDetails from "@/views/MovieDetails";
+
+import MovieView from "@/views/MovieView"
+
+import Table from "@/views/Table";
 
 Vue.use(VueRouter)
 
@@ -59,24 +65,47 @@ const routes = [
     },
 
     {
-        path: '/OldManInfo',
-        name: 'OldManInfo',
-        component: OldManInfo
+        path: '/MovieInfo',
+        name: 'MovieInfo',
+        component: MovieInfo
     },
     {
-        path: '/OldManDetails/:id',
-        name: 'OldManDetails',
-        component: OldManDetails
+        path: '/MovieDetailsBackend/:id',
+        name: 'MovieDetailsBackend',
+        component: MovieDetailsBackend
     },
     {
-        path: '/OldManAdd',
-        name: 'OldManAdd',
-        component: OldManAdd
+        path: '/MovieAdd',
+        name: 'MovieAdd',
+        component: MovieAdd
     },
     {
-        path: '/Test',
-        name: 'Test',
-        component: Test
+        path: '/Home',
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/Test2',
+        name: 'Test2',
+        component: Test2
+    },
+
+    {
+        path: '/MovieDetails/:id',
+        name: 'MovieDetails',
+        component: MovieDetails
+    },
+
+    {
+        path: '/Table',
+        name: 'Table',
+        component: Table
+    },
+
+    {
+        path: '/MovieView',
+        name: 'MovieView',
+        component: MovieView
     }
 
 ]

@@ -4,6 +4,7 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import VueCookies from "vue-cookies";
 import axios from 'axios'
 import Moment from 'moment'
 import global_variable from "@/utils/global_variable";

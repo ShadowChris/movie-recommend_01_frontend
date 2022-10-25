@@ -2,7 +2,7 @@
 <div id="OldManInfo"  class="box">
     <el-main>
       <el-breadcrumb separator-class="el-icon-arrow-right" style="background: #669999;padding-bottom: 4px;margin-bottom: 30px">
-        <el-breadcrumb-item :to="{path:'/OldManInfo'}" style="padding: 10px 0 2px 10px; font-size: 1.5em;color: #d9d9d9">老人信息列表</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{path:'/OldManInfo'}" style="padding: 10px 0 2px 10px; font-size: 1.5em;color: #d9d9d9">电影信息列表</el-breadcrumb-item>
       </el-breadcrumb>
       <div>
         <!--搜索框-->
@@ -58,14 +58,12 @@
                   @click="imginto(scope.$index, scope.row, 'oldpeople')"></el-image>
             </template>
           </el-table-column>
-          <el-table-column prop="username" label="姓名"></el-table-column>
-          <el-table-column prop="gender" label="性别"></el-table-column>
-          <el-table-column prop="phone" label="电话"></el-table-column>
-          <el-table-column prop="id_card" width="180px" label="身份证号"></el-table-column>
-          <el-table-column prop="room_number" width="80px" label="房间号"></el-table-column>
-          <el-table-column prop="birthday" label="出生日期" :formatter="dateFormat" sortable></el-table-column>
-          <el-table-column prop="checkin_date" label="入园日期" :formatter="dateFormat" sortable></el-table-column>
-          <el-table-column prop="checkout_date" label="出园日期" :formatter="dateFormat" sortable></el-table-column>
+          <el-table-column prop="name" label="名称"></el-table-column>
+          <el-table-column prop="date" label="发表时间"></el-table-column>
+          <el-table-column prop="directors" label="导演"></el-table-column>
+          <el-table-column prop="writers" width="180px" label="编剧"></el-table-column>
+          <el-table-column prop="stars" width="80px" label="主演"></el-table-column>
+
 
           <el-table-column label="编辑">
             <template slot-scope="scope">
@@ -131,26 +129,17 @@ export default {
         value: 'id',
         label: 'id'
       }, {
-        value: 'username',
-        label: '姓名'
+        value: 'name',
+        label: '名称'
       }, {
-        value: 'id_card',
-        label: '身份证'
+        value: 'date',
+        label: '发表时间'
       }, {
-        value: 'room_number',
-        label: '房间号'
-      }, {
-        value: 'birthday',
-        label: '出生日期'
-      }, {
-        value: 'checkin_date',
-        label: '入园日期'
-      }, {
-        value: 'checkout_date',
-        label: '出园日期'
+        value: 'directors',
+        label: '导演'
       }],
       //被选中的值
-      chosenValue: 'username'
+      chosenValue: 'name'
 
     };
   },

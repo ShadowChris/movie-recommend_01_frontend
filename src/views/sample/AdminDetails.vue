@@ -3,7 +3,7 @@
     <el-main style="padding: 0">
       <el-breadcrumb separator-class="el-icon-arrow-right" style="background: #669999">
         <el-breadcrumb-item :to="{path:'/'}"
-                            style="padding: 10px 0 2px 10px; font-size: 1.5em;color: #FFFFFF">管理员信息
+                            style="padding: 10px 0 2px 10px; font-size: 1.5em;color: #FFFFFF">用户信息
         </el-breadcrumb-item>
         <el-breadcrumb-item style="padding: 15px 0 2px 0; font-size: 1.1em">详细信息</el-breadcrumb-item>
       </el-breadcrumb>
