@@ -6,7 +6,7 @@
       <el-container style="width:1300px; background-color:#372948" >
         <el-aside width="70%" style="padding-left:50px;padding-right: 30px;">
 
-          <template >
+          <template>
             <div class="slide-content" align="left">
               <p class="count"> {{movie.name}}{{movie.date}}</p>
               <div class="rateAndType">
@@ -87,7 +87,10 @@ export default {
       })
     },
     open() {
-      this.$message('successfully rated!');
+      this.$message({
+        message: 'Successfully rated!',
+        type: 'success'
+      });
     },
     rateMovies(){
       axios.post("http://172.17.147.222:8080/rating/rateAMovie", {

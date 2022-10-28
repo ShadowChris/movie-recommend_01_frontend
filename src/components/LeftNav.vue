@@ -30,17 +30,17 @@
           <i class="el-icon-user"></i>
           <span>Algorithm Present</span>
         </template>
-        <el-menu-item index="/MovieView">Recommander</el-menu-item>
+        <el-menu-item index="/MovieView">Recommender</el-menu-item>
 <!--        <el-menu-item index="/Home">主页</el-menu-item>-->
       </el-submenu>
 
       <el-submenu index="3">
         <template #title>
           <i class="el-icon-user"></i>
-          <span>Background-Infor</span>
+          <span>Background Infos</span>
         </template>
-        <el-menu-item index="/MovieInfo">Infor-List</el-menu-item>
-        <el-menu-item index="/MovieAdd">Input-Infor</el-menu-item>
+        <el-menu-item index="/MovieInfo">Infos List</el-menu-item>
+        <el-menu-item index="/MovieAdd">Input Infos</el-menu-item>
       </el-submenu>
 
 
