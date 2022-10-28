@@ -12,22 +12,31 @@
       <el-main>
         <p> Content-based recommendation results</p>
         <el-row>
-          <el-col :span="8" v-for="(item) in this.movieList" :key="item.id">
-            <el-card :body-style="{ padding: '0px' }">
+          <el-col :span="8" v-for="(item) in this.movieList" :key="item.id" style="margin: 10px">
+            <el-card :body-style="{ padding: '20px' }" shadow="hover">
 
-              <el-popover
-                  placement="top-start"
-                  title="Title"
-                  width="200"
-                  trigger="hover"
-                  :content="item.name">
-                <img :src="item.url" class="image" slot="reference" style="width: 180px; height: 280px">
-              </el-popover>
+<!--              <el-popover-->
+<!--                  placement="top-start"-->
+<!--                  title="Title"-->
+<!--                  width="200"-->
+<!--                  trigger="hover"-->
+<!--                  :content="item.name">-->
+<!--                <img :src="item.url" class="image" slot="reference" style="width: 180px; height: 280px">-->
+<!--              </el-popover>-->
               <div style="padding: 5px; text-align: center">
-                <!--              <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>-->
-
+                <img :src="item.url" class="image" slot="reference" style="width: 174px; height: 256px">
                 <div class="bottom clearfix" font-size="5px">
-                  <router-link :to="'/MovieDetails/' + item.id">Details</router-link>
+                  <router-link id="card-name" :to="'/MovieDetails/' + item.id" :underline="false"
+                               style="
+                             font-size: 16px;
+                             display: block;
+                             padding-top: 5px;
+                             padding-bottom: 30px;
+                             height: 10px;
+                             text-decoration: none;
+                             font-weight: bold;
+                             line-height:15px">
+                    {{item.name}}</router-link>
                 </div>
                 <div class="block">
                   <el-rate
@@ -69,22 +78,32 @@
 <!--        </el-row>-->
         <p> Collaborative Filtering Recommendations</p>
         <el-row>
-          <el-col :span="8" v-for="(item) in this.movieList2" :key="item.id">
-            <el-card :body-style="{ padding: '0px' }">
+          <el-col :span="8" v-for="(item) in this.movieList2" :key="item.id" style="margin: 10px">
+            <el-card :body-style="{ padding: '20px' }">
 
-              <el-popover
-                  placement="top-start"
-                  title="Title"
-                  width="200"
-                  trigger="hover"
-                  :content="item.name">
-                <img :src="item.url" class="image" slot="reference" style="width: 180px; height: 280px">
-              </el-popover>
+<!--              <el-popover-->
+<!--                  placement="top-start"-->
+<!--                  title="Title"-->
+<!--                  width="200"-->
+<!--                  trigger="hover"-->
+<!--                  :content="item.name">-->
+<!--                <img :src="item.url" class="image" slot="reference" style="width: 180px; height: 280px">-->
+<!--              </el-popover>-->
               <div style="padding: 5px; text-align: center">
                 <!--              <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>-->
-
+                <img :src="item.url" class="image" slot="reference" style="width: 174px; height: 256px">
                 <div class="bottom clearfix" font-size="5px">
-                  <router-link :to="'/MovieDetails/' + item.id">Details</router-link>
+                  <router-link id="card-name" :to="'/MovieDetails/' + item.id" :underline="false"
+                               style="
+                             font-size: 16px;
+                             display: block;
+                             padding-top: 5px;
+                             padding-bottom: 30px;
+                             height: 10px;
+                             text-decoration: none;
+                             font-weight: bold;
+                             line-height:15px">
+                    {{item.name}}</router-link>
                 </div>
                 <div class="block">
                   <el-rate
