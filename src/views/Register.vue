@@ -3,51 +3,31 @@
     <div id="backimg"></div>
     <div class="card">
       <div class="box12">
-        注册
+        Register
       </div>
       <hr>
       <div class="box32">
-        已有账号，点击 <router-link id="Register" to="/login">登录</router-link>
+        Already have an account, click <router-link id="Register" to="/login">Login</router-link>
       </div>
       <div class="box22">
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" id="block" :label-position="labelPosition" >
-<!--          <el-form-item label="用户名" prop="username" id="e">-->
-<!--            <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.username"></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-form-item label="真实姓名" prop="Realname" id="es">-->
-<!--            <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.realname"></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-form-item label="邮箱" prop="mail" id="ei">-->
-<!--            <el-input prefix-icon="el-icon-s-promotion"  v-model="ruleForm.mail"></el-input>-->
-<!--          </el-form-item>-->
-          <el-form-item label="手机号" prop="phone" id="eisss">
+
+          <el-form-item label="mobile" prop="phone" id="eisss">
             <el-input prefix-icon="el-icon-phone"  v-model="ruleForm.mobile"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="passwd" id="eis">
+          <el-form-item label="password" prop="passwd" id="eis">
             <el-input prefix-icon="el-icon-key" type="password" v-model="ruleForm.passwd" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="确认密码" prop="checkPass" id="eiss">
+          <el-form-item label="confirm password" prop="checkPass" id="eiss">
             <el-input prefix-icon="el-icon-key" type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="验证码" prop="code" id="e">
+          <el-form-item label="code" prop="code" id="e">
             <el-input prefix-icon="el-icon-user-solid"  v-model="ruleForm.code"></el-input>
           </el-form-item>
-<!--          <el-row :gutter="20">-->
-<!--            <div id="eisssss">-->
-<!--              <el-col :span="4" :offset="2"><span>性别</span></el-col>-->
-<!--              <el-col :span="18" ><el-radio-group style="padding-right: 35%" v-model="ruleForm.sex">-->
-<!--&lt;!&ndash;                <el-col :span="4" :offset="4"><el-radio label="man">男</el-radio></el-col>&ndash;&gt;-->
-<!--&lt;!&ndash;                <el-col :span="4" :offset="4"><el-radio label="woman">女</el-radio></el-col>&ndash;&gt;-->
-<!--                <el-radio label="男">男</el-radio>-->
-<!--                <el-radio label="女">女</el-radio>-->
-<!--              </el-radio-group></el-col>-->
-<!--            </div>-->
-<!--          </el-row>-->
-
           <el-row :gutter="20">
             <div class="butbox">
-              <el-col :span="8" :offset="8"><el-button type="primary" @click="submitForm('ruleForm')">注册</el-button></el-col>
-              <el-col :span="8"><el-button @click="resetForm('ruleForm')">重置</el-button></el-col>
+              <el-col :span="8" :offset="8"><el-button type="primary" @click="submitForm('ruleForm')">register</el-button></el-col>
+              <el-col :span="8"><el-button @click="resetForm('ruleForm')">reset</el-button></el-col>
             </div>
           </el-row>
         </el-form>
@@ -59,6 +39,7 @@
 <script>
 
 import axios from "axios";
+import global_variable from "@/utils/global_variable";
 
 const TIME_COUNT = 60 // 设置一个全局的倒计时的时间
 export default {
@@ -79,23 +60,24 @@ export default {
     // };
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'));
+        callback(new Error('please enter password'));
       } else {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass');
         }
-        // if(!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){10,16}$/.test(value)) {
-        //   callback(new Error('请输入10-16位英文字母、数字或者符号(除空格)，且字母、数字和标点符号至少包含两种'))
-        //
-        // }
-        callback();
+      //   if(!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){10,16}$/.test(value)) {
+      //     callback(new Error('Please enter 10-16 English letters, numbers or symbols (except spaces), ' +
+      //         'and include at least two types of letters, numbers and punctuation marks'))
+      //
+      //   }
+      //   callback();
       }
     };
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请再次输入密码'));
+        callback(new Error('please enter password again'));
       } else if (value !== this.ruleForm.passwd) {
-        callback(new Error('两次输入密码不一致!'));
+        callback(new Error('The passwords entered twice do not match!'));
       } else {
         callback();
       }
@@ -103,13 +85,13 @@ export default {
     var checkPhone = (rule, value, callback) => {
       const regMobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57])[0-9]{8}$/
       if (!value) {
-        return callback(new Error('号码不能为空'));
+        return callback(new Error('Number cannot be empty'));
       }
       setTimeout(() => {
         if (regMobile.test(value)) {
           callback()
         } else {
-          callback(new Error('请输入正确的号码格式'))
+          callback(new Error('Please enter the correct number format'))
         }
       }, 100)
     };
@@ -175,7 +157,7 @@ export default {
         if (valid) {
               this.$http({
                 method: 'post',
-                url: "http://192.168.1.100:8282" + '/signup/mobile',
+                url: global_variable.goURL + '/signup/mobile',
                 data: {
                   mobile:this.ruleForm.mobile,
                   passwd:this.ruleForm.passwd,
@@ -185,7 +167,7 @@ export default {
                 console.log(res)
                 if(res.data.code == 200){
                   this.$router.replace("/login");
-                  this.$message.success('注册成功');
+                  this.$message.success('Successfully');
                 }
               })
         } else {

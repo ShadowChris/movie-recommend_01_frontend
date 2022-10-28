@@ -2,16 +2,16 @@
 <div id="OldManInfo"  class="box">
     <el-main>
       <el-breadcrumb separator-class="el-icon-arrow-right" style="background: #669999;padding-bottom: 4px;margin-bottom: 30px">
-        <el-breadcrumb-item :to="{path:'/OldManInfo'}" style="padding: 10px 0 2px 10px; font-size: 1.5em;color: #d9d9d9">电影信息列表</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{path:'/OldManInfo'}" style="padding: 10px 0 2px 10px; font-size: 1.5em;color: #d9d9d9">Movie information list</el-breadcrumb-item>
       </el-breadcrumb>
       <div>
         <!--搜索框-->
         <el-row :gutter="10">
           <el-col :span="6" class="grid">
-            <el-input style="left: 10px" v-model="input" placeholder="请输入关键词"></el-input>
+            <el-input style="left: 10px" v-model="input" placeholder="Please enter a keyword"></el-input>
           </el-col>
           <el-col :span="4" class="grid">
-            <el-select v-model="chosenValue" placeholder="请选择">
+            <el-select v-model="chosenValue" placeholder="choose one">
               <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -21,10 +21,10 @@
             </el-select>
           </el-col>
           <el-col :span="1" class="grid">
-            <el-button type="success" icon="el-icon-search" @click.prevent="search()">搜索</el-button>
+            <el-button type="success" icon="el-icon-search" @click.prevent="search()"></el-button>
           </el-col>
           <el-col :span="2" class="grid" style="padding-left: 50px">
-            <el-button type="info" @click="listAllInfo()">重置</el-button>
+            <el-button type="info" @click="listAllInfo()">reset</el-button>
           </el-col>
         </el-row>
 
@@ -51,33 +51,33 @@
           <!--索引-->
           <!-- <el-table-column type="index" :index="indexMethod"></el-table-column> -->
           <el-table-column prop="id" label="id" sortable></el-table-column>
-          <el-table-column prop="profile_photo" label="头像">
+          <el-table-column prop="profile_photo" label="Image">
             <template slot-scope="scope">
               <el-image
                   :src="scope.row.profile_photo"
                   @click="imginto(scope.$index, scope.row, 'oldpeople')"></el-image>
             </template>
           </el-table-column>
-          <el-table-column prop="name" label="名称"></el-table-column>
-          <el-table-column prop="date" label="发表时间"></el-table-column>
-          <el-table-column prop="directors" label="导演"></el-table-column>
-          <el-table-column prop="writers" width="180px" label="编剧"></el-table-column>
-          <el-table-column prop="stars" width="80px" label="主演"></el-table-column>
+          <el-table-column prop="name" label="Title"></el-table-column>
+          <el-table-column prop="date" label="Release"></el-table-column>
+          <el-table-column prop="directors" label="Director"></el-table-column>
+          <el-table-column prop="writers" width="180px" label="Writter"></el-table-column>
+          <el-table-column prop="stars" width="80px" label="Stars"></el-table-column>
 
 
-          <el-table-column label="编辑">
+          <el-table-column label="Edit">
             <template slot-scope="scope">
               <router-link to="/OldManDetails">
                 <el-button type="primary" icon="el-icon-edit" size="mini"
-                           @click.prevent="updateInfo(scope.$index, scope.row)">编辑
+                           @click.prevent="updateInfo(scope.$index, scope.row)">Edit
                 </el-button>
               </router-link>
             </template>
           </el-table-column>
-          <el-table-column label="删除">
+          <el-table-column label="Delete">
             <template slot-scope="scope">
               <el-button type="danger" icon="el-icon-delete" size="mini"
-                         @click.prevent="open(scope.$index, scope.row)">删除
+                         @click.prevent="open(scope.$index, scope.row)">Delete
               </el-button>
             </template>
           </el-table-column>
@@ -130,13 +130,13 @@ export default {
         label: 'id'
       }, {
         value: 'name',
-        label: '名称'
+        label: 'Title'
       }, {
         value: 'date',
-        label: '发表时间'
+        label: 'Release'
       }, {
         value: 'directors',
-        label: '导演'
+        label: 'Director'
       }],
       //被选中的值
       chosenValue: 'name'

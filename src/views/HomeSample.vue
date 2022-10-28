@@ -2,8 +2,8 @@
   <div class="box">
     <div class="right">
       <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item style="padding: 10px 0 2px 10px; font-size: 1.5em;">首页</el-breadcrumb-item>
-        <el-breadcrumb-item  style="padding: 15px 0 2px 0; font-size: 1.1em">用户信息</el-breadcrumb-item>
+        <el-breadcrumb-item style="padding: 10px 0 2px 10px; font-size: 1.5em;">Home</el-breadcrumb-item>
+        <el-breadcrumb-item  style="padding: 15px 0 2px 0; font-size: 1.1em">User Information</el-breadcrumb-item>
       </el-breadcrumb>
       <div class="videos">
         <el-main class="show">
@@ -28,34 +28,34 @@
               <el-row :gutter="20" style="padding-top: 10px">
                 <el-col :span="14" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
                   <i class="el-icon-user"></i>
-                  <h3>&nbsp;姓名:&nbsp;</h3>
+                  <h3>&nbsp;Name:&nbsp;</h3>
                   <span>{{ user['real_name'] }}</span>
                 </div></el-col>
                 <el-col :span="10"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
                   <i class="el-icon-female"></i>
                   <i class="el-icon-male"></i>
-                  <h3>&nbsp;性别:&nbsp;</h3>
+                  <h3>&nbsp;Sex:&nbsp;</h3>
                   <span>{{ user['sex'] }}</span>
                 </div></el-col>
               </el-row>
               <el-row :gutter="20">
                 <el-col :span="24" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
                   <i class="el-icon-position"></i>
-                  <h3>&nbsp;邮箱:&nbsp;</h3>
+                  <h3>&nbsp;Email:&nbsp;</h3>
                   <span>{{ user['email'] }}</span>
                 </div></el-col>
               </el-row>
               <el-row :gutter="20">
                 <el-col :span="24" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
                   <i class="el-icon-phone-outline"></i>
-                  <h3>&nbsp;手机:&nbsp;</h3>
+                  <h3>&nbsp;Phone:&nbsp;</h3>
                   <span>{{ user['mobile'] }}</span>
                 </div></el-col>
               </el-row>
               <el-row :gutter="20">
                 <el-col :span="24" style="padding-left: 8%"><div class="grid-content bg-purple" style="display: flex;align-items: center;">
                   <i class="el-icon-phone-outline"></i>
-                  <h3>&nbsp;固话:&nbsp;</h3>
+                  <h3>&nbsp;Phone:&nbsp;</h3>
                   <span>{{ user['phone'] }}</span>
                 </div></el-col>
               </el-row>
@@ -107,7 +107,7 @@
         </el-main>
       </div>
       <div class="tip">
-        <el-footer>Copyright &nbsp; 2021 &nbsp; BJTU_养老专业团队</el-footer>
+        <el-footer>Copyright &nbsp; 2022 &nbsp; ISS Group 14</el-footer>
       </div>
     </div>
   </div>

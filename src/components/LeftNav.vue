@@ -18,9 +18,9 @@
         <el-button class="eb"  v-show="!isCollapse" size="mini" type="primary" icon="el-icon-d-arrow-left" @click="click" round></el-button>
       </div>
 
-      <el-menu-item index="/HomeInform">
+      <el-menu-item index="/Home">
         <i class="el-icon-house"></i>
-        <template #title>首页</template>
+        <template #title>Home</template>
       </el-menu-item>
 
 
@@ -28,20 +28,19 @@
       <el-submenu index="2">
         <template #title>
           <i class="el-icon-user"></i>
-          <span>算法展示</span>
+          <span>Algorithm Present</span>
         </template>
-        <el-menu-item index="/MovieView">推荐算法</el-menu-item>
-        <el-menu-item index="/Home">主页</el-menu-item>
-        <el-menu-item index="/Test2">Test2</el-menu-item>
+        <el-menu-item index="/MovieView">Recommander</el-menu-item>
+<!--        <el-menu-item index="/Home">主页</el-menu-item>-->
       </el-submenu>
 
       <el-submenu index="3">
         <template #title>
           <i class="el-icon-user"></i>
-          <span>电影信息</span>
+          <span>Background-Infor</span>
         </template>
-        <el-menu-item index="/MovieInfo">信息列表</el-menu-item>
-        <el-menu-item index="/MovieAdd">录入信息</el-menu-item>
+        <el-menu-item index="/MovieInfo">Infor-List</el-menu-item>
+        <el-menu-item index="/MovieAdd">Input-Infor</el-menu-item>
       </el-submenu>
 
 

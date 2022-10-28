@@ -12,7 +12,6 @@ import MovieAdd from "@/views/sample/MovieAdd";
 import MovieDetailsBackend from "@/views/sample/MovieDetailsBackend";
 
 import Home from "@/views/Home"
-import Test2 from "@/views/Test2";
 import MovieDetails from "@/views/MovieDetails";
 
 import MovieView from "@/views/MovieView"
@@ -25,8 +24,8 @@ const routes = [
 
     {
         path: '/',
-        name: 'HomeInform',
-        component: HomeInform
+        name: 'Home',
+        component: Home
     },
     {
         path: '/HomeInform',
@@ -84,11 +83,7 @@ const routes = [
         name: 'Home',
         component: Home
     },
-    {
-        path: '/Test2',
-        name: 'Test2',
-        component: Test2
-    },
+
 
     {
         path: '/MovieDetails/:id',

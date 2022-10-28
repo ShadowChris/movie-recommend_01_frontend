@@ -1,37 +1,11 @@
 <template>
-  <el-container>
-    <el-aside width="200px">
-  <el-table
-      :data="tableData"
-      style="width: 100%">
-    <el-table-column
-        prop="Name"
-        label="算法名称"
-        width="180">
-    </el-table-column>
-    <el-table-column
-        prop="MSE"
-        label="MSE"
-        width="180">
-    </el-table-column>
-    <el-table-column
-        prop="RMSE"
-        label="RMSE">
-    </el-table-column>
-  </el-table>
-    </el-aside>
 
-    <el-main>
-  <div class="psgBarChart" ref="psgBarChart"></div>
-      </el-main>
-  </el-container>
+  <div id="psgBarChart" ref="psgBarChart"></div>
+
 </template>
 
 <script>
 import global_variable from "@/utils/global_variable";
-import * as echarts from 'echarts'
-
-
 
 export default {
 
@@ -53,81 +27,52 @@ export default {
     }
   },
   mounted() {
-    let barOption = {
-      // 设置柱状图的位置
-      grid: {
-        // 距离左方轴数值
-        x: 248,
-        // y:200,
-        x2: 264,
-        // 距离下方轴数值
-        // y2: 120,
-        containLabel: true
-      },
-      xAxis: {
-        type: 'category',
-        data: ['眼要花了', '眼要花了', '眼要花了'],
-        // boundaryGap: false,
-        // 刻度上字体的样式
-        axisLabel: {
-          padding: [34, 0, 0, 0],
-          fontSize: 60,
-          color: '#fff',
+    this.updateChart()
+    // console.log(this.getList('MSE'))
+  },
+  methods: {
+    updateChart() {
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = this.$echarts.init(document.getElementById('psgBarChart'));
+
+      // 指定图表的配置项和数据
+      let option = {
+        title: {
+          text: 'Recommendation Performance'
         },
-        // x轴的样式
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: '#999',
-            width: 10
+        tooltip: {},
+        legend: {
+          data: ['MSE', 'RMSE']
+        },
+        xAxis: {
+          data: ['Content Based Model', 'Collaborative Filtering Model']
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'MSE',
+            type: 'bar',
+            data: this.getTableDataList('MSE')
+          },
+          {
+            name: 'RMSE',
+            type: 'bar',
+            data: this.getTableDataList('RMSE')
           }
-        }
-      },
-      yAxis: {
-        type: 'value',
-        // 不展示y轴
-        show: false,
-        // 不展示分割线
-        splitLine: {
-          show: false
-        },
+        ]
+      };
 
-      },
-      series: [
-        {
-          data: [7, 6, 5],
-          type: 'bar',
-          //   柱子的宽度
-          barWidth: 100,
-          //   柱子的颜色
-          itemStyle: {
-            color: {
-              type: 'linear',
-              x: 0,
-              y: 0,
-              x2: 0,
-              y2: 1,
-              colorStops: [{
-                offset: 0, color: '#ECBD50' // 0% 处的颜色
-              }, {
-                offset: 1, color: 'rgba(236, 189, 80, 0)' // 100% 处的颜色
-              }],
-              global: false // 缺省为 false
-            }
-          },
-          //  对应数值展示在柱子中间
-          label: {
-            show: true,
-            position: 'inside',
-            fontSize:60,
-            color:'#fff'
-          },
-
-        }
-      ]
-    };
-    let barChart = echarts.init(this.$refs.psgBarChart);
-    barChart.setOption(barOption)
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+    },
+    getTableDataList(index) {
+      var arr = new Array()
+      for (let i in this.tableData) {
+        let item = this.tableData[i][index]
+        arr.push(item)
+      }
+      return arr
+    }
   }
 
 }
@@ -135,8 +80,9 @@ export default {
 </script>
 
 <style >
-.psgBarChart {
-  width: 6000px;
+#psgBarChart {
+  margin-top: 100px;
+  width: 1200px;
   height: 500px;
   background-color: pink;
 }

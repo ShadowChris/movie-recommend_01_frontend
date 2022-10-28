@@ -8,10 +8,10 @@ import VueCookies from "vue-cookies";
 import axios from 'axios'
 import Moment from 'moment'
 import global_variable from "@/utils/global_variable";
-import OSS from 'ali-oss'
+// import Cookies from 'js-cookie';
 import * as echarts from 'echarts'
 Vue.prototype.$echarts = echarts
-
+// Vue.prototype.$Cookies = Cookies
 
 import LeftNav from "@/components/LeftNav";
 import HeadNav from "@/components/HeadNav";

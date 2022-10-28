@@ -15,7 +15,9 @@
                       v-model="value"
                       show-score
                       text-color="#ff9900"
-                      score-template="{value}">
+                      score-template="{value}"
+
+                      @change="open">
                   </el-rate>
                 </div>
                 <el-tag
@@ -26,12 +28,12 @@
                 </el-tag>
               </div>
               <div id="movie" class="movie-profile">
-                <p>导演：{{movie.directors}}</p>
-                <p>编剧：{{movie.writers}}</p>
-                <p>主演：{{movie.stars}}</p>
-                <p>国家/地区：{{movie.releaseTime}}</p>
-                <p>时长：{{movie.time}}</p>
-                <p>介绍：{{movie.intro}}</p>
+                <p>Driectors：{{movie.directors}}</p>
+                <p>Writters：{{movie.writers}}</p>
+                <p>Stars：{{movie.stars}}</p>
+                <p>Release：{{movie.releaseTime}}</p>
+                <p>Duration：{{movie.time}}</p>
+                <p>Intro：{{movie.intro}}</p>
               </div>
             </div>
           </template>
@@ -80,8 +82,12 @@ export default {
         console.log(resp.data)
         if (resp && resp.status === 200) {
           _this.movie = resp.data.data
+          this.value = _this.movie.rating
         }
       })
+    },
+    open() {
+      this.$message('successfully rated!');
     },
     rateMovies(){
       axios.post("http://172.17.147.222:8080/rating/rateAMovie", {

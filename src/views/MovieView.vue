@@ -10,16 +10,24 @@
       </el-header>
 
       <el-main>
-        <h1> 基于内容推荐结果</h1>
+        <p> Content-based recommendation results</p>
         <el-row>
           <el-col :span="8" v-for="(item) in this.movieList" :key="item.id">
             <el-card :body-style="{ padding: '0px' }">
-              <img :src="item.url" class="image">
-              <div style="padding: 8px; text-align: center">
-                <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <router-link :to="'/MovieDetails/' + item.id">详细信息</router-link>
+
+              <el-popover
+                  placement="top-start"
+                  title="Title"
+                  width="200"
+                  trigger="hover"
+                  :content="item.name">
+                <img :src="item.url" class="image" slot="reference" style="width: 180px; height: 280px">
+              </el-popover>
+              <div style="padding: 5px; text-align: center">
+                <!--              <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>-->
+
+                <div class="bottom clearfix" font-size="5px">
+                  <router-link :to="'/MovieDetails/' + item.id">Details</router-link>
                 </div>
                 <div class="block">
                   <el-rate
@@ -35,16 +43,48 @@
 
           </el-col>
         </el-row>
-        <h1> 协同过滤的推荐结果</h1>
+<!--        <el-row>-->
+<!--          <el-col :span="8" v-for="(item) in this.movieList" :key="item.id">-->
+<!--            <el-card :body-style="{ padding: '0px' }">-->
+<!--              <img :src="item.url" class="image">-->
+<!--              <div style="padding: 8px; text-align: center">-->
+<!--                <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>-->
+<!--                <div class="bottom clearfix">-->
+<!--                  <time class="time">{{ currentDate }}</time>-->
+<!--                  <router-link :to="'/MovieDetails/' + item.id">详细信息</router-link>-->
+<!--                </div>-->
+<!--                <div class="block">-->
+<!--                  <el-rate-->
+<!--                      v-model="item.rating"-->
+<!--                      disabled-->
+<!--                      show-score-->
+<!--                      text-color="#ff9900"-->
+<!--                      score-template="{value}">-->
+<!--                  </el-rate>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </el-card>-->
+
+<!--          </el-col>-->
+<!--        </el-row>-->
+        <p> Collaborative Filtering Recommendations</p>
         <el-row>
           <el-col :span="8" v-for="(item) in this.movieList2" :key="item.id">
             <el-card :body-style="{ padding: '0px' }">
-              <img :src="item.url" class="image">
-              <div style="padding: 8px; text-align: center">
-                <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>
-                <div class="bottom clearfix">
-                  <time class="time">{{ currentDate }}</time>
-                  <router-link :to="'/MovieDetails/' + item.id">详细信息</router-link>
+
+              <el-popover
+                  placement="top-start"
+                  title="Title"
+                  width="200"
+                  trigger="hover"
+                  :content="item.name">
+                <img :src="item.url" class="image" slot="reference" style="width: 180px; height: 280px">
+              </el-popover>
+              <div style="padding: 5px; text-align: center">
+                <!--              <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>-->
+
+                <div class="bottom clearfix" font-size="5px">
+                  <router-link :to="'/MovieDetails/' + item.id">Details</router-link>
                 </div>
                 <div class="block">
                   <el-rate
@@ -60,11 +100,35 @@
 
           </el-col>
         </el-row>
+<!--        <el-row>-->
+<!--          <el-col :span="8" v-for="(item) in this.movieList2" :key="item.id">-->
+<!--            <el-card :body-style="{ padding: '0px' }">-->
+<!--              <img :src="item.url" class="image">-->
+<!--              <div style="padding: 8px; text-align: center">-->
+<!--                <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>-->
+<!--                <div class="bottom clearfix">-->
+<!--                  <time class="time">{{ currentDate }}</time>-->
+<!--                  <router-link :to="'/MovieDetails/' + item.id">详细信息</router-link>-->
+<!--                </div>-->
+<!--                <div class="block">-->
+<!--                  <el-rate-->
+<!--                      v-model="item.rating"-->
+<!--                      disabled-->
+<!--                      show-score-->
+<!--                      text-color="#ff9900"-->
+<!--                      score-template="{value}">-->
+<!--                  </el-rate>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </el-card>-->
+
+<!--          </el-col>-->
+<!--        </el-row>-->
 
       </el-main>
       <el-footer>
         <el-row>
-          <el-button @click="$router.push('/Table')" >算法性能演示</el-button>
+          <el-button @click="$router.push('/Table')" >Algorithm Performance</el-button>
         </el-row>
       </el-footer>
 
@@ -137,6 +201,14 @@ export default {
 </script>
 
 <style>
+
+p {
+  color: #3a91ba;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
 
 span{
   text-align: center;

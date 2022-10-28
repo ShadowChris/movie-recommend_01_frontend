@@ -3,26 +3,26 @@
     <div id="backimg"></div>
     <div class="card">
       <div class="box11">
-        登录
+        Login
       </div>
       <hr>
       <div class="box31">
-        没有账号，点击 <router-link id="Register" to="/Register">注册</router-link>
+        No account, click <router-link id="Register" to="/Register">Register</router-link>
 <!--        &nbsp;-->
       </div>
       <div class="box21">
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" id="block" :label-position="labelPosition" >
-          <el-form-item label="账号" prop="UserName" id="ei">
-            <el-input prefix-icon="el-icon-user-solid" v-model="ruleForm.UserName"></el-input>
+          <el-form-item label="mobile" prop="mobile" id="ei">
+            <el-input prefix-icon="el-icon-user-solid" v-model="ruleForm.mobile"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="Password" id="eis">
+          <el-form-item label="password" prop="Password" id="eis">
             <el-input prefix-icon="el-icon-key" type="password" v-model="ruleForm.Password" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
         <el-row :gutter="20">
           <div class="butbox">
-            <el-col :span="8" :offset="8"><el-button type="primary" @click="submitForm('ruleForm')">登录</el-button></el-col>
-            <el-col :span="8"><el-button @click="resetForm('ruleForm')">重置</el-button></el-col>
+            <el-col :span="8" :offset="8"><el-button type="primary" @click="submitForm('ruleForm')">login</el-button></el-col>
+            <el-col :span="8"><el-button @click="resetForm('ruleForm')">reset</el-button></el-col>
           </div>
         </el-row>
       </div>
@@ -44,22 +44,24 @@
 // Vue.use(Divider)
 
 import axios from "axios";
+import global_variable from "@/utils/global_variable";
 
 export default {
   name: 'Login',
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入密码'));
+        callback(new Error('Please enter password'));
       } else {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass');
         }
-        if(!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){9,16}$/.test(value)) {
-          callback(new Error('请输入10-16位英文字母、数字或者符号(除空格)，且字母、数字和标点符号至少包含两种'))
-
-        }
-        callback();
+        // if(!/^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){9,16}$/.test(value)) {
+        //   callback(new Error('Please enter 10-16 English letters, numbers or symbols (except spaces), ' +
+        //       'and include at least two types of letters, numbers and punctuation marks'))
+        //
+        // }
+        // callback();
       }
     };
 
@@ -68,7 +70,7 @@ export default {
       userToken: '',
       ruleForm: {
         Password: '',
-        UserName: '',
+        mobile: '',
       },
       zhud:false,
       loading:false,
@@ -82,32 +84,27 @@ export default {
   methods: {
 
     getUser(){
-      axios.post(this.global.baseURL + this.global.loginRegisterURL.login, {
-        UserName: this.ruleForm.UserName,
-        Password: this.ruleForm.Password
+      axios.post(global_variable.goURL + '/login', {
+        mobile:this.ruleForm.mobile,
+        passwd: this.ruleForm.Password
       }).then(res => {
+        console.log(res)
         if(res.status == 200){
-          console.log("登录信息：")
+          console.log("Login-Infor：")
           console.log(res)
-          if(res.data.status == 0){
-            this.$message.success("登录成功")
-            sessionStorage.setItem("user", JSON.stringify(res.data.data.user))
-            this.$router.replace("/")
-
+          if(res.data.code == 200){
+            this.$message.success("Successfully")
+            // sessionStorage.setItem("user", JSON.stringify(res.data.data.user))
+            // console.log(res.headers)
+            this.$router.replace("/Home")
             // var user = JSON.parse(sessionStorage.getItem("user"))
             // console.log(user)
-
-
           } else {
-            this.$message.error("登录失败！")
+            this.$message.error("Error!")
           }
-
-
-
         }else {
-          this.$message.error("连接服务器失败")
+          this.$message.error("Network Error")
         }
-
       })
 
 

@@ -2,8 +2,8 @@
 const baseURL = "http://localhost:3000"
 // const baseURL = "http://192.168.43.27:9000"
 
-const springURL = "http://172.17.146.76:8080"
-
+const springURL = "http://192.168.0.188:8080"
+const goURL = "http://172.20.10.6:8282"
 const loginRegisterURL = {
     login: "/back/login",
     register: "/back/register"
@@ -63,6 +63,7 @@ export default {
     // workerURL,
     adminURL,
     loginRegisterURL,
-    springURL
+    springURL,
+    goURL
 }
 

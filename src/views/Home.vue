@@ -1,10 +1,12 @@
 <template>
 <div id="Home">
 
-  <el-container style="padding-top: 100px; width: 1500px; background-color: #e8e8e8">
+  <el-container style="padding-top: 120px; width: 1500px; background-color: #e8e8e8">
+    <el-aside>
+      </el-aside>
     <el-header>
       <el-row>
-        <el-col :span="25"><el-input v-model="input" placeholder="请输入内容"></el-input></el-col>
+        <el-col :span="25"><el-input v-model="input" placeholder="Please Input"></el-input></el-col>
         <el-col :span="1"><el-button icon="el-icon-search" circle @click="this.search"></el-button></el-col>
       </el-row>
     </el-header>
@@ -13,11 +15,20 @@
       <el-row>
         <el-col :span="8" v-for="(item) in this.movieList" :key="item.id">
           <el-card :body-style="{ padding: '0px' }">
-            <img :src="item.url" class="image">
-            <div style="padding: 8px; text-align: center">
-              <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>
-              <div class="bottom clearfix">
-                <router-link :to="'/MovieDetails/' + item.id">详细信息</router-link>
+
+            <el-popover
+                placement="top-start"
+                title="Title"
+                width="200"
+                trigger="hover"
+                :content="item.name">
+                <img :src="item.url" class="image" slot="reference" style="width: 180px; height: 280px">
+            </el-popover>
+            <div style="padding: 5px; text-align: center">
+<!--              <span style="font-size: 10px; font-weight: bold">{{item.name}}</span>-->
+
+              <div class="bottom clearfix" font-size="5px">
+                <router-link :to="'/MovieDetails/' + item.id">Detail</router-link>
               </div>
               <div class="block">
                 <el-rate
@@ -70,7 +81,8 @@ export default {
         colors: ['#99A9BF', '#F7BA2A', '#FF9900'], // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' },
         movieList: [],
         currentPage: 1,
-        pageSize: 5
+        pageSize: 10,
+        visible: false
       }
   },
 
@@ -123,25 +135,25 @@ export default {
 <style>
 
 span{
+  width: auto;
   text-align: center;
 }
+
 .time {
-  font-size: 13px;
+  font-size: 20px;
   color: #999;
 }
+
+
 
 .bottom {
   margin-top: 13px;
   line-height: 12px;
 }
 
-.button {
-  padding: 0;
-  float: right;
-}
 
 .image {
-  width: 100%;
+  width: 120%;
   display: block;
 }
 
