@@ -58,7 +58,7 @@
 
 // import Rate from "@/components/common/Rate";
 
-import ImageDetails from "@/views/sample/ImageDetails";
+import ImageDetails from "@/views/Management/ImageDetails";
 import axios from "axios";
 import global_variable from "@/utils/global_variable";
 export default {
