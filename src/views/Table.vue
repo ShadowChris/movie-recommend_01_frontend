@@ -6,27 +6,27 @@
 
 <script>
 import global_variable from "@/utils/global_variable";
+import axios from "axios";
+import Global_variable from "@/utils/global_variable";
 
 export default {
 
   data() {
     return {
-      tableData: [{
-        Name: '基于内容的推荐算法',
-        MSE: '0.96124462',
-        RMSE: '0.98043083'
-      }, {
-        Name: '协同过滤推荐算法',
-        MSE: '1.255092442',
-        RMSE: '1.12030908'
-      }, {
-        Name: '矩阵分解推荐算法',
-        MSE: '0.95787807',
-        RMSE: '0.97871245'
-      }]
+      // tableData: [{
+      //   Name: '基于内容的推荐算法',
+      //   MSE: '0.96124462',
+      //   RMSE: '0.98043083'
+      // }, {
+      //   Name: '协同过滤推荐算法',
+      //   MSE: '1.255092442',
+      //   RMSE: '1.12030908'
+      // }]
+      tableData: []
     }
   },
   mounted() {
+    this.getModelPerformance()
     this.updateChart()
     // console.log(this.getList('MSE'))
   },
@@ -72,6 +72,13 @@ export default {
         arr.push(item)
       }
       return arr
+    },
+    getModelPerformance() {
+      axios.get(Global_variable.springURL + "/recommend/getPerformance").then(res => {
+        if (res && res.status === 200) {
+          this.tableData = res.data.performance
+        }
+      })
     }
   }
 

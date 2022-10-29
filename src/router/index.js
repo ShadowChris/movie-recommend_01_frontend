@@ -5,11 +5,11 @@ import Register from "@/views/Register";
 
 import HomeInform from "@/views/HomeSample";
 
-import AdminDetails from "@/views/sample/AdminDetails";
+import AdminDetails from "@/views/Management/AdminDetails";
 
-import MovieInfo from "@/views/sample/MovieInfo";
-import MovieAdd from "@/views/sample/MovieAdd";
-import MovieDetailsBackend from "@/views/sample/MovieDetailsBackend";
+import MovieInfo from "@/views/Management/MovieInfo";
+import MovieAdd from "@/views/Management/MovieAdd";
+import MovieDetailsBackend from "@/views/Management/MovieDetailsBackend";
 
 import Home from "@/views/Home"
 import MovieDetails from "@/views/MovieDetails";
