@@ -2,7 +2,7 @@
 const baseURL = "http://localhost:3000"
 // const baseURL = "http://192.168.43.27:9000"
 
-const springURL = "http://localhost:8080"
+const springURL = "http://192.168.186.129:8080"
 const goURL = "http://172.20.10.6:8282"
 const loginRegisterURL = {
     login: "/back/login",
